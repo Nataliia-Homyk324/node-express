@@ -1,5 +1,16 @@
-import { getAllStudents, getStudentById } from '../services/students.js';
+import { getAllStudents, getStudentById, createStudent } from '../services/students.js';
 import createHttpError from 'http-errors';
+
+
+export const createStudentController = async (req, res) => {
+  const student = await createStudent(req.body);
+
+  res.status(201).json({
+    status: 201,
+    message: `Successfully created a student!`,
+    data: student,
+  });
+};
 
 
 export const getStudentsController = async (
