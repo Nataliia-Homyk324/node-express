@@ -1,7 +1,7 @@
 import { getAllStudents, getStudentById, createStudent, deleteStudent, updateStudent } from '../services/students.js';
 import createHttpError from 'http-errors';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
-
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const createStudentController = async (req, res) => {
   const student = await createStudent(req.body);
@@ -20,10 +20,13 @@ export const getStudentsController = async (
 	next,
 ) => {
   try {
-     const { page, perPage } = parsePaginationParams(req.query);
+    const { page, perPage } = parsePaginationParams(req.query);
+     const { sortBy, sortOrder } = parseSortParams(req.query);
 	  const students = await getAllStudents({
     page,
     perPage,
+    sortBy,
+    sortOrder,
   });
 
 	  res.json({
@@ -36,19 +39,8 @@ export const getStudentsController = async (
 	}
 };
 
-// export const getStudentsController = async (req, res) => {
-//   const { page, perPage } = parsePaginationParams(req.query);
-//   const students = await getAllStudents({
-//     page,
-//     perPage,
-//   });
 
-//   res.json({
-//     status: 200,
-//     message: 'Successfully found students!',
-//     data: students,
-//   });
-// };
+
 
 export const getStudentByIdController = async (req, res, next) => {
   const { studentId } = req.params;
