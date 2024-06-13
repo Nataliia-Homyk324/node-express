@@ -12,6 +12,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { createStudentSchema, updateStudentSchema } from '../validation/students.js';
 import { isValidId } from '../middlewares/isValidId.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
 
@@ -26,6 +27,10 @@ router.delete('/students/:studentId',isValidId, ctrlWrapper(deleteStudentControl
 router.put('/students/:studentId', isValidId,  ctrlWrapper(upsertStudentController));
 
 router.patch('/students/:studentId', isValidId, validateBody(updateStudentSchema), ctrlWrapper(patchStudentController));
+
+router.use(authenticate);
+
+router.get('/', ctrlWrapper(getStudentsController));
 
 export default router;
 
