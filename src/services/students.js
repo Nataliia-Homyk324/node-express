@@ -3,6 +3,7 @@ import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { SORT_ORDER } from '../index.js';
 
 
+
 export const getAllStudents = async ({
   page = 1,
   perPage = 10,
@@ -29,7 +30,7 @@ export const getAllStudents = async ({
   if (filter.minAvgMark) {
     studentsQuery.where('avgMark').gte(filter.minAvgMark);
   }
-  
+
   const studentsCount = await StudentsCollection.find()
     .merge(studentsQuery)
     .countDocuments();

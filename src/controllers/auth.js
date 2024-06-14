@@ -13,6 +13,7 @@ export const registerUserController = async (req, res) => {
     data: user,
   });
 };
+
 export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
 
@@ -33,6 +34,7 @@ export const loginUserController = async (req, res) => {
     },
   });
 };
+
 export const logoutUserController = async (req, res) => {
   if (req.cookies.sessionId) {
     await logoutUser(req.cookies.sessionId);
