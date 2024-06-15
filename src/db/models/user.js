@@ -1,29 +1,18 @@
 import { model, Schema } from 'mongoose';
-// import { ROLES } from '../../index.js';
 
-const ROLES = {
-  TEACHER: 'teacher',
-  PARENT: 'parent',
-};
 const usersSchema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-     role: {
-      type: String,
-      enum: [ROLES.TEACHER, ROLES.PARENT],
-      default: ROLES.PARENT,
-    },
   },
-    {
-        timestamps: true,
-        versionKey: false
-    },
+  { timestamps: true, versionKey: false },
 );
+
 usersSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
   return obj;
 };
+
 export const UsersCollection = model('users', usersSchema);

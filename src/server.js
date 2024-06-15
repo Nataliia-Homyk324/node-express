@@ -40,7 +40,7 @@ export const startServer = () => {
 
 
   app.use(cookieParser());
-   app.use(errorHandler);
+  app.use(errorHandler);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

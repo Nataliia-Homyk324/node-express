@@ -4,6 +4,8 @@ import { ONE_DAY } from '../index.js';
 import { logoutUser } from '../services/auth.js';
 import { refreshUsersSession } from '../services/auth.js';
 
+
+
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
 
@@ -13,7 +15,6 @@ export const registerUserController = async (req, res) => {
     data: user,
   });
 };
-
 export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
 
