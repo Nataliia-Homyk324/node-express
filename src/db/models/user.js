@@ -1,6 +1,10 @@
 import { model, Schema } from 'mongoose';
-import { ROLES } from '../../index.js';
+// import { ROLES } from '../../index.js';
 
+const ROLES = {
+  TEACHER: 'teacher',
+  PARENT: 'parent',
+};
 const usersSchema = new Schema(
   {
     name: { type: String, required: true },
