@@ -6,6 +6,11 @@ const studentsSchema = new Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
     age: {
       type: Number,
       required: true,
@@ -24,7 +29,8 @@ const studentsSchema = new Schema(
       required: true,
       default: false,
     },
-      parentId: { type: Schema.Types.ObjectId, ref: 'users' },  // нова властивість
+    parentId: { type: Schema.Types.ObjectId, ref: 'users' },  // нова властивість
+    photo: { type: String },
   },
   {
     timestamps: true,

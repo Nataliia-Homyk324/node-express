@@ -15,6 +15,7 @@ import { isValidId } from '../middlewares/isValidId.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { checkRoles } from '../middlewares/checkRoles.js';
 import { ROLES } from '../constants/index.js';
+import { upload } from '../middlewares/multer.js';
 
 
 const router = Router();
@@ -27,13 +28,13 @@ router.get('/', ctrlWrapper(getStudentsController));
 
 router.get('/:studentId',checkRoles(ROLES.TEACHER, ROLES.PARENT),isValidId, ctrlWrapper(getStudentByIdController));
 
-router.post('/',checkRoles(ROLES.TEACHER), validateBody(createStudentSchema), ctrlWrapper(createStudentController));
+router.post('/',checkRoles(ROLES.TEACHER),  validateBody(createStudentSchema),upload.single('photo'), ctrlWrapper(createStudentController));
 
 router.delete('/:studentId',checkRoles(ROLES.TEACHER),isValidId, ctrlWrapper(deleteStudentController));
 
-router.put('/:studentId', checkRoles(ROLES.TEACHER), ctrlWrapper(upsertStudentController));
+router.put('/:studentId', checkRoles(ROLES.TEACHER),upload.single('photo'), ctrlWrapper(upsertStudentController));
 
-router.patch('/:studentId',checkRoles(ROLES.TEACHER, ROLES.PARENT), isValidId, validateBody(updateStudentSchema), ctrlWrapper(patchStudentController));
+router.patch('/:studentId',checkRoles(ROLES.TEACHER, ROLES.PARENT), isValidId, upload.single('photo'),validateBody(updateStudentSchema), ctrlWrapper(patchStudentController));
 
 
 

@@ -8,6 +8,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
 
 import router from './routers/index.js';
+ import { UPLOAD_DIR } from './constants/index.js';
 
 
 const PORT = Number(env('PORT', '3000'));
@@ -44,6 +45,7 @@ app.use(router);
 
 
   app.use(errorHandler);
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
