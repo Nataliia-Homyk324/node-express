@@ -123,7 +123,7 @@ export const patchStudentController = async (req, res, next) => {
   //   photoUrl = await saveFileToUploadDir(photo);
   // }
 
-  const result = await updateStudent(studentId, {
+  const result = await updateStudent(studentId,  {
     ...req.body,
     photo: photoUrl,
   });
